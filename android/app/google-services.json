@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "279641354595",
+    "project_id": "lifeline-367c1",
+    "storage_bucket": "lifeline-367c1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:279641354595:android:5c21d802931092a49ee356",
+        "android_client_info": {
+          "package_name": "com.Aditya.lifeline"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "279641354595-luj28ovsrsi9snr63h0f07j737031j99.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvyk_v2ULYpmyfknGgAzvcmOB2zoe-lIQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "279641354595-luj28ovsrsi9snr63h0f07j737031j99.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

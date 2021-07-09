@@ -7,11 +7,11 @@ The present world is moving towards the development of online services. In this 
 
 This application is built on the flutter framework using Firebase as the backend and Cloud Firestore as the database.
 
-This application has a Welcome page.
-Fig 1 shows the Welcome page of our project.
+This application has a Welcome page.  
+Fig 1 shows the Welcome page of our project.  
 
-<img src="assets/1.jpg" width="200" height="400">
-Fig 1
+<img src="assets/1.jpg" width="200" height="400">  
+Fig 1  
 
 The button Lets get started takes the user to the home page. If the user has already registered, click on login button otherwise click on registration button.
 Fig 2 shows login-registration page.  
@@ -20,5 +20,15 @@ Fig 2
   
 Fig 3 and Fig 4 shows the UI of Registration page and Login page.  
 <pre> <img src="assets/3.jpg" width="200" height="400">          <img src="assets/4.jpg" width="200" height="400">  
-Fig 3                                                    Fig 4  </pre>
+Fig 3                              Fig 4  </pre>  
+
+After clicking on register or login button, the user gets to the home page. All other users are listed on the home page. The user can select any of them to start direct chat.
+Fig 5 shows home page.
+<img src="assets/5.jpg" width="200" height="400">  
+Fig 5  
+
+The person icon on the top-right of the home page gets the user to his/her profile page. And the power icon on the right of it prompt the user to sign Out.  
+Fig 6 shows my profile page and Fig 7 shows Sign out prompt.  
+<pre> <img src="assets/6.jpg" width="200" height="400">                <img src="assets/7.jpg" width="200" height="400">  
+Fig 6                             Fig 7  </pre>  
 

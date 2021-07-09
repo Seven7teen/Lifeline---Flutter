@@ -19,106 +19,126 @@ class _LoginScreenState extends State<LoginScreen> {
   String email;
   String password;
   String userID;
+  final email_c = TextEditingController();
+  final pass_c = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        margin: EdgeInsets.fromLTRB(20.0, 100, 20.0, 20.0),
-        padding: EdgeInsets.all(24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Flexible(
-              child: Hero(
-                tag: 'logo',
-                child: Container(
-                  height: 200.0,
-                  child: Image.asset('assets/Applook.PNG'),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 8.0),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Flexible(
+                child: Hero(
+                  tag: 'logo',
+                  child: Container(
+                    height: 200.0,
+                    child: Image.asset('assets/Applook.PNG'),
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            InputText(
-              ontap: (value) {
-                email = value;
-              },
-              hintText: 'Enter your email',
-              labelText: 'Email',
-              prefixIcon: Icon(Icons.email_outlined),
-            ),
-            InputText(
-              ontap: (value) {
-                password = value;
-              },
-              hintText: 'Enter your password',
-              labelText: 'password',
-              prefixIcon: Icon(Icons.vpn_key_outlined),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            RoundButton(
-                text: 'LOGIN',
-                ontap: () async {
-                  try {
-                    final user = await _auth.signInWithEmailAndPassword(
-                        email: email, password: password);
-                    if (user != null) {
-                      loggedInUser = _auth.currentUser;
-                      userID = loggedInUser.uid;
-                      print(loggedInUser.email);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomeScreen(
-                            userEmail: loggedInUser.email,
-                            userID: userID,
+              SizedBox(
+                height: 30,
+              ),
+              InputText(
+                controller: email_c,
+                ontap: (value) {
+                  email = value;
+                },
+                hintText: 'Enter your email',
+                labelText: 'Email',
+                prefixIcon: Icon(Icons.email_outlined),
+              ),
+              InputText(
+                controller: pass_c,
+                ontap: (value) {
+                  password = value;
+                },
+                hintText: 'Enter your password',
+                labelText: 'password',
+                prefixIcon: Icon(Icons.vpn_key_outlined),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              RoundButton(
+                  text: 'LOGIN',
+                  ontap: () async {
+                    email_c.clear();
+                    pass_c.clear();
+                    try {
+                      final user = await _auth.signInWithEmailAndPassword(
+                          email: email, password: password);
+                      if (user != null) {
+                        loggedInUser = _auth.currentUser;
+                        userID = loggedInUser.uid;
+                        print(loggedInUser.email);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HomeScreen(
+                              userEmail: loggedInUser.email,
+                              userID: userID,
+                            ),
                           ),
+                        );
+                      }
+                    } catch (e) {
+                      showDialog<String>(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: const Text('Incorrect email or password'),
+                          // content: const Text('Stay in Touch...'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, 'OK'),
+                              child: const Text('Retry'),
+                            ),
+                          ],
                         ),
                       );
+                      print(e);
                     }
-                  } catch (e) {
-                    print(e);
-                  }
-                },
-                colour: Colors.lightBlueAccent),
-            SizedBox(
-              height: 150,
-            ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'Dont have an account?',
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10.0,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                          RegistrationScreen.id,
-                          ModalRoute.withName(WelcomeScreen.id));
-                    },
-                    child: Text(
-                      'Register',
+                  },
+                  colour: Colors.lightBlueAccent),
+              SizedBox(
+                height: 50,
+              ),
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'Dont have an account?',
                       style: TextStyle(
-                        color: Colors.blue,
                         fontSize: 16,
                       ),
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            RegistrationScreen.id,
+                            ModalRoute.withName(WelcomeScreen.id));
+                      },
+                      child: Text(
+                        'Register',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

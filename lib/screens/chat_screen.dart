@@ -57,15 +57,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: null,
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(Icons.close),
-              onPressed: () {
-                _auth.signOut();
-                Navigator.pop(context);
-              }),
-        ],
-        title: Text('⚡️Chat: Hey ${widget.receiverUsername.toUpperCase()}'),
+        title: Text('Hey ${widget.receiverUsername.toUpperCase()}'),
         backgroundColor: Colors.lightBlueAccent,
       ),
       body: SafeArea(

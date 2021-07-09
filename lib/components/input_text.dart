@@ -6,8 +6,14 @@ class InputText extends StatefulWidget {
   String hintText;
   String labelText;
   Icon prefixIcon;
+  TextEditingController controller;
 
-  InputText({this.ontap, this.hintText, this.labelText, this.prefixIcon});
+  InputText(
+      {this.controller,
+      this.ontap,
+      this.hintText,
+      this.labelText,
+      this.prefixIcon});
 
   @override
   _InputTextState createState() => _InputTextState();
@@ -19,6 +25,7 @@ class _InputTextState extends State<InputText> {
     return Padding(
       padding: EdgeInsets.all(5.0),
       child: TextFormField(
+        controller: widget.controller,
         onChanged: widget.ontap,
         decoration: kTextFieldDecoration.copyWith(
           hintText: widget.hintText,

@@ -18,147 +18,162 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final _auth = FirebaseAuth.instance;
   String email;
   String password;
-  String username;
+  String username = 'null';
   String userID;
-  String dob;
-  String country;
+  String dob = 'null';
+  String country = 'null';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        margin: EdgeInsets.fromLTRB(20.0, 100, 20.0, 20.0),
-        padding: EdgeInsets.all(24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Flexible(
-              child: Hero(
-                tag: 'chat_icon',
-                child: Icon(
-                  Icons.chat,
-                  color: Colors.red,
-                  size: 200.0,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 8.0),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Flexible(
+                child: Hero(
+                  tag: 'logo',
+                  child: Container(
+                    height: 200.0,
+                    child: Image.asset('assets/Applook.PNG'),
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            InputText(
-              ontap: (value) {
-                username = value;
-              },
-              hintText: 'Enter your username',
-              labelText: 'Username',
-              prefixIcon: Icon(Icons.person_outline_outlined),
-            ),
-            InputText(
-              ontap: (value) {
-                email = value;
-              },
-              hintText: 'Enter your email',
-              labelText: 'Email',
-              prefixIcon: Icon(Icons.email_outlined),
-            ),
-            InputText(
-              ontap: (value) {
-                password = value;
-              },
-              hintText: 'Enter your password',
-              labelText: 'password',
-              prefixIcon: Icon(Icons.vpn_key_outlined),
-            ),
-            InputText(
+              SizedBox(
+                height: 10,
+              ),
+              InputText(
                 ontap: (value) {
-                  dob = value;
+                  username = value;
                 },
-                hintText: 'Enter your date of birth',
-                labelText: 'Date of Birth',
-                prefixIcon: Icon(Icons.calendar_today_outlined)),
-            InputText(
+                hintText: 'Enter your username',
+                labelText: 'Username',
+                prefixIcon: Icon(Icons.person_outline_outlined),
+              ),
+              InputText(
                 ontap: (value) {
-                  country = value;
+                  email = value;
                 },
-                hintText: 'Enter your country',
-                labelText: 'country',
-                prefixIcon: Icon(Icons.location_city)),
-            SizedBox(
-              height: 30,
-            ),
-            RoundButton(
-                text: 'REGISTER',
-                ontap: () async {
-                  try {
-                    final newUser = await _auth.createUserWithEmailAndPassword(
-                      email: email,
-                      password: password,
-                    );
-                    if (newUser != null) {
-                      loggedInUser = _auth.currentUser;
-                      userID = loggedInUser.uid;
-                      print(loggedInUser.email);
-                      FirebaseFirestore.instance
-                          .collection('users')
-                          .doc('${email.toUpperCase()}')
-                          .set({
-                        // 'userData': userData,
-                        //     {
-                        'username': username,
-                        'email': email,
-                        'timestamp': FieldValue.serverTimestamp(),
-                        'userID': loggedInUser.uid,
-                        'dob': dob,
-                        'country': country,
-                      });
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => HomeScreen(
-                                    userEmail: loggedInUser.email,
-                                    userID: userID,
-                                  )));
+                hintText: 'Enter your email',
+                labelText: 'Email',
+                prefixIcon: Icon(Icons.email_outlined),
+              ),
+              InputText(
+                ontap: (value) {
+                  password = value;
+                },
+                hintText: 'Enter your password',
+                labelText: 'password',
+                prefixIcon: Icon(Icons.vpn_key_outlined),
+              ),
+              // InputText(
+              //     ontap: (value) {
+              //       dob = value;
+              //     },
+              //     hintText: 'Enter your date of birth',
+              //     labelText: 'Date of Birth',
+              //     prefixIcon: Icon(Icons.calendar_today_outlined)),
+              // InputText(
+              //     ontap: (value) {
+              //       country = value;
+              //     },
+              //     hintText: 'Enter your country',
+              //     labelText: 'country',
+              //     prefixIcon: Icon(Icons.location_city),),
+              SizedBox(
+                height: 10,
+              ),
+              RoundButton(
+                  text: 'REGISTER',
+                  ontap: () async {
+                    try {
+                      final newUser =
+                          await _auth.createUserWithEmailAndPassword(
+                        email: email,
+                        password: password,
+                      );
+                      if (newUser != null) {
+                        loggedInUser = _auth.currentUser;
+                        userID = loggedInUser.uid;
+                        print(loggedInUser.email);
+                        FirebaseFirestore.instance
+                            .collection('users')
+                            .doc('${email.toUpperCase()}')
+                            .set({
+                          // 'userData': userData,
+                          //     {
+                          'username': username,
+                          'email': email,
+                          'timestamp': FieldValue.serverTimestamp(),
+                          'userID': loggedInUser.uid,
+                          'dob': dob,
+                          'country': country,
+                        });
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeScreen(
+                                      userEmail: loggedInUser.email,
+                                      userID: userID,
+                                    )));
+                      }
+                    } catch (e) {
+                      showDialog<String>(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text(
+                              'The email address is already in use by another account.'),
+                          // content: const Text('Stay in Touch...'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, 'OK'),
+                              child: const Text('Try another email'),
+                            ),
+                          ],
+                        ),
+                      );
+                      print(e);
                     }
-                  } catch (e) {
-                    print(e);
-                  }
-                },
-                colour: Colors.green),
-            SizedBox(
-              height: 150,
-            ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'Already have an account?',
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10.0,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                          LoginScreen.id,
-                          ModalRoute.withName(RegistrationScreen.id));
-                    },
-                    child: Text(
-                      'Login',
+                  },
+                  colour: Colors.green),
+              SizedBox(
+                height: 50,
+              ),
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'Already have an account?',
                       style: TextStyle(
-                        color: Colors.blue,
                         fontSize: 16,
                       ),
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            LoginScreen.id,
+                            ModalRoute.withName(RegistrationScreen.id));
+                      },
+                      child: Text(
+                        'Login',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -33,56 +33,76 @@ class _UserStreamState extends State<UserStream> {
             );
           }
           final users = snapshot.data.docs.reversed;
-          List<ListTile> usersList = [];
+          List<Card> usersList = [];
           for (var user in users) {
             final userName = user.data()['username'];
             final receiverEmail = user.data()['email'];
             final userid = user.data()['userID'];
             if (userid != widget.widget.userID) {
-              final listElement = ListTile(
-                enabled: true,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ChatScreen(
-                        receiverEmail: receiverEmail,
-                        receiverUsername: userName,
-                        senderUserEmail: widget.widget.userEmail,
-                        receiverUserId: userid,
-                        senderUserId: widget.widget.userID,
-                      ),
-                    ),
-                  );
-                },
-                leading: GestureDetector(
-                  child: Icon(Icons.person_pin),
+              final listElement = Card(
+                elevation: 5.0,
+                // margin: EdgeInsets.all(0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.zero,
+                ),
+                child: InkWell(
+                  // splashColor: Colors.red,
                   onTap: () {
-                    // print(receiverEmail);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ReceiverProfileScreen(
-                            receiverEmail: receiverEmail,
-                            icon: Icon(Icons.person_pin)),
+                        builder: (context) => ChatScreen(
+                          receiverEmail: receiverEmail,
+                          receiverUsername: userName,
+                          senderUserEmail: widget.widget.userEmail,
+                          receiverUserId: userid,
+                          senderUserId: widget.widget.userID,
+                        ),
                       ),
                     );
                   },
-                ),
-                title: Text(
-                  userName,
-                  style: TextStyle(fontSize: 15.0),
-                ),
-                subtitle: Text(
-                  last_seen,
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.auto_awesome,
+                      color: Colors.pink,
+                      size: 25,
+                    ),
+                    trailing: GestureDetector(
+                      child: Icon(
+                        Icons.person_sharp,
+                        color: Colors.black,
+                        size: 25,
+                      ),
+                      onTap: () {
+                        // print(receiverEmail);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ReceiverProfileScreen(
+                                receiverEmail: receiverEmail,
+                                icon: Icon(Icons.person_pin)),
+                          ),
+                        );
+                      },
+                    ),
+                    title: Text(
+                      userName,
+                      style: TextStyle(fontSize: 15.0),
+                    ),
+                    subtitle: Text(
+                      last_seen,
+                    ),
+                    minVerticalPadding: 10.0,
+                  ),
                 ),
               );
               usersList.add(listElement);
+              // final SpacelistElement = ListTile(),
             }
           }
           return ListView(
             shrinkWrap: true,
-            padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
+            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
             children: usersList,
           );
         });

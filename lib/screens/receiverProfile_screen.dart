@@ -43,48 +43,109 @@ class _ReceiverProfileScreenState extends State<ReceiverProfileScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: widget.icon,
+        title: Text('Profile'),
       ),
-      body: Center(
-          child: Column(
-        children: [
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-            child: Text(email == null ? 'null' : email),
+      body: Container(
+        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
+        width: 600,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/profile_bc.jpg'),
+            fit: BoxFit.cover,
           ),
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-            child: Text(username == null ? 'null' : username),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-            child: Text(dob == null ? 'null' : dob),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-            child: Text(country == null ? 'null' : country),
-          ),
-          Container(
-            padding: EdgeInsets.all(10.0),
-            child: IconButton(
-              icon: Icon(Icons.message),
-              iconSize: 40.0,
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ChatScreen(
-                      receiverEmail: email,
-                      senderUserEmail: loggedInUser.email,
-                      receiverUsername: username,
-                    ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Card(
+              color: Colors.pink[50],
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                child: Text(
+                  email == null ? 'null' : 'Email: ${email}',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
-                );
-              },
+                ),
+              ),
             ),
-          )
-        ],
-      )),
+            Card(
+              color: Colors.pink[50],
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                child: Text(
+                  username == null ? 'null' : 'Username: ${username}',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            Card(
+              color: Colors.pink[50],
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                child: Text(
+                  dob == null ? 'null' : 'Date of Birth: ${dob}',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            Card(
+              color: Colors.pink[50],
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                child: Text(
+                  country == null ? 'null' : 'Nationalism: ${country}',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            Card(
+              color: Colors.pink[50],
+              child: Container(
+                padding: EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Message directly',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.message),
+                      iconSize: 40.0,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ChatScreen(
+                              receiverEmail: email,
+                              senderUserEmail: loggedInUser.email,
+                              receiverUsername: username,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

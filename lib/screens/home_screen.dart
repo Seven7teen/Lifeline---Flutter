@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lifeline/components/user_stream.dart';
-import 'package:lifeline/components/round_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:lifeline/screens/welcome_screen.dart';
 import 'myprofile_screen.dart';
-import 'package:lifeline/screens/login_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static String id = 'home_screen';
@@ -21,62 +21,65 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        margin: EdgeInsets.all(30.0),
-        padding: EdgeInsets.all(20.0),
-        color: Colors.red,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      backgroundColor: Colors.grey,
+      appBar: AppBar(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            RoundButton(
-              text: 'Profile',
-              colour: Colors.grey,
-              ontap: () {
-                print(widget.userEmail);
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            MyProfileScreen(userEmail: widget.userEmail)));
-              },
-            ),
-            RoundButton(
-              text: 'log out',
-              colour: Colors.black,
-              ontap: () {
-                Navigator.popUntil(
-                    context, ModalRoute.withName(LoginScreen.id));
-              },
-            ),
-            Container(
-              child: ElevatedButton(
-                onPressed: () => showDialog<String>(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    title: const Text('AlertDialog Title'),
-                    content: const Text('AlertDialog description'),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, 'Cancel'),
-                        child: const Text('Cancel'),
+            Text('Chats'),
+            Row(
+              children: <Widget>[
+                IconButton(
+                  icon: Icon(
+                    Icons.person,
+                  ),
+                  iconSize: 30,
+                  onPressed: () {
+                    print(widget.userEmail);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MyProfileScreen(
+                          userEmail: widget.userEmail,
+                        ),
                       ),
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, 'OK'),
-                        child: const Text('OK'),
-                      ),
-                    ],
+                    );
+                  },
+                ),
+                // SizedBox(width: 5.0),
+                IconButton(
+                  icon: Icon(
+                    Icons.power_settings_new_outlined,
+                  ),
+                  iconSize: 30,
+                  onPressed: () => showDialog<String>(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text('Do you want to Sign Out?'),
+                      content: const Text('Stay in Touch...'),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            FirebaseAuth.instance.signOut();
+                            Navigator.popUntil(
+                                context, ModalRoute.withName(WelcomeScreen.id));
+                          },
+                          child: const Text('Sign Out'),
+                        ),
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, 'OK'),
+                          child: const Text('No'),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                child: const Text('Show Dialog'),
-              ),
-            ),
-            Container(
-              color: Colors.white,
-              child: UserStream(user: user, widget: widget),
+              ],
             ),
           ],
         ),
       ),
+      body: UserStream(user: user, widget: widget),
     );
   }
 }

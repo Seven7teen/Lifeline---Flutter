@@ -1,17 +1,17 @@
-# lifeline
+# lifeline <pre><img src="assets/Applook.PNG" width="20" height="20">  
 
 Messaging App
 
 # Requirement
 
--> Any IDE with Flutter SDK installed (ie. IntelliJ, Android Studio, VSCode etc)
--> An Android Mobile Phone
+-> Any IDE with Flutter SDK installed (ie. IntelliJ, Android Studio, VSCode etc)  
+-> An Android Mobile Phone  
 
 # How To Run
 
--> git clone https://github.com/Seven7teen/Lifeline---Flutter.git
--> cd lifeline
--> flutter run --release
+-> git clone https://github.com/Seven7teen/Lifeline---Flutter.git  
+-> cd lifeline  
+-> flutter run --release  
 
 ## GETTING INTO THE PROJECT:
 The present world is moving towards the development of online services. In this context, the communication domain can be contributed by developing an online platform that can be used for direct messaging among people from all over. This application allows users to chat with other users, view their profile. It also allow the users to update their profile, change password and delete account also.

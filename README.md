@@ -2,12 +2,12 @@
 
 Messaging App
 
-# Requirement
+## Requirement
 
 -> Any IDE with Flutter SDK installed (ie. IntelliJ, Android Studio, VSCode etc)  
 -> An Android Mobile Phone  
 
-# How To Run
+## How To Run
 
 -> git clone https://github.com/Seven7teen/Lifeline---Flutter.git  
 -> cd lifeline  

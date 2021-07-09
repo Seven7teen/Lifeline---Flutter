@@ -13,7 +13,7 @@ Messaging App
 -> cd lifeline  
 -> flutter run --release  
 
-## GETTING INTO THE PROJECT:
+## Getting Into The Project:
 The present world is moving towards the development of online services. In this context, the communication domain can be contributed by developing an online platform that can be used for direct messaging among people from all over. This application allows users to chat with other users, view their profile. It also allow the users to update their profile, change password and delete account also.
 
 This application is built on the flutter framework using Firebase as the backend and Cloud Firestore as the database.

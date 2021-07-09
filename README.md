@@ -14,11 +14,11 @@ Fig 1 shows the Welcome page of our project.
 Fig 1
 
 The button Lets get started takes the user to the home page. If the user has already registered, click on login button otherwise click on registration button.
-Fig 2 shows login-registration page.
-<img src="assets/2.jpg" width="200" height="400">
-Fig 2
-
-Fig 3 and Fig 4 shows the UI of Registration page and Login page. 
-<img src="assets/3.jpg" width="200" height="400">       <img src="assets/4.jpg" width="200" height="400">
+Fig 2 shows login-registration page.  
+<img src="assets/2.jpg" width="200" height="400">  
+Fig 2  
+  
+Fig 3 and Fig 4 shows the UI of Registration page and Login page.  
+<img src="assets/3.jpg" width="200" height="400">       <img src="assets/4.jpg" width="200" height="400">  
 Fig 3                                                    Fig 4
 

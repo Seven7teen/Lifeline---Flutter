@@ -10,7 +10,7 @@ This application is built on the flutter framework using Firebase as the backend
 This application has a Welcome page.
 Fig 1.1 shows the Welcome page of our project.
 
-<img src="assets/1.jpg" width="400" height="800">
+<img src="assets/1.jpg" width="200" height="400">
 
 
 The ‘Home’ page consists of 3 modules:
